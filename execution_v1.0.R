@@ -32,18 +32,18 @@ for (idir in seq_along(dir_check)) {
    if (!dir.exists(paths = get(dir_check[idir]))) stop(paste0(dir_check[idir], ' does not exist!'))
 } ; rm(dir_check, idir)
 
-# Print directory paths:
-print(paste0('Simulation directory: ', simulation_dir), quote=FALSE)
-print('Please make sure this is the simulation that you desire!', quote=FALSE) ; cat('\n')
-print(paste0('Code directory: ', code_dir), quote=FALSE)
-print('Please make sure this is the code directory that you desire!', quote=FALSE) ; cat('\n')
-
 # Source input scripts:
 # *** Please make sure the input scripts (e.g., input_TEMIR.R) are in the same simulation directory as this execution script. ***
 input_scripts = list.files(path = simulation_dir, pattern = "^input_")
 for (script in input_scripts) {
    source(file = paste0(simulation_dir, script))
 }
+
+# Print directory paths:
+print(paste0('Simulation directory: ', simulation_dir), quote=FALSE)
+print('Please make sure this is the simulation that you desire!', quote=FALSE) ; cat('\n')
+print(paste0('Code directory: ', code_dir), quote=FALSE)
+print('Please make sure this is the code directory that you desire!', quote=FALSE) ; cat('\n')
 
 # Get simulation configuration for saving:
 model_config_vec = setdiff(ls(), ls(pattern = '_dir$'))
